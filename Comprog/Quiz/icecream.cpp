@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    int n,maxx=0;
+    int n;
     cin >> n;
-    double total=0;
+    double total=0,maxx=0;
     map<string,pair<double,int>> icecream;
     for(int i{0} ; i<n ; i++){
        string name;
@@ -33,8 +33,7 @@ int main(){
         cout << "Total ice cream sales: " << total << endl;
         cout << "Top sales: ";
         for(auto s : icecream){
-            if(s.second.first == maxx)
-            cout << s.first << " ";
+            if(s.second.first == maxx) cout << s.first << " ";
         }
     }
 
