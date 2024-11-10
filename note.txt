@@ -1,5 +1,0 @@
-while(count!=b){
-    a*=a
-    count++
-}
-return a
