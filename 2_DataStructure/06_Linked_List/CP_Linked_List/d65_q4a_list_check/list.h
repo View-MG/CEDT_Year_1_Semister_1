@@ -202,7 +202,7 @@ class list
         std::cout << " (prev = " << it.ptr->prev << ", I'm at " << it.ptr << ", next = " << it.ptr->next << ")" <<  std:: endl;
       }
     }
-
+    
 };
 
 }

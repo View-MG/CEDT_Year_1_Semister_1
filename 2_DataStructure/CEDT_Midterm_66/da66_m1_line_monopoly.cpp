@@ -1,49 +1,29 @@
 #include<bits/stdc++.h>
-using namespace std;
 typedef long long ll;
-bool sortMonopoly(pair<ll,ll> &a, pair<ll,ll> &b){
-    if(a.first == b.first) return a.second < b.second;
-    return a.first < b.first;
-}
-int main(){
-    ios_base::sync_with_stdio(false); cin.tie(NULL); 
-    vector<pair<ll,ll>> m,cal;
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     int n; cin >> n;
-    for(int j{0} ; j<n ; j++){
+    set<pair<ll, ll>> monopoly;
+    for (int i{0} ; i<n; i++) {
         int c; cin >> c;
-        if(c == 1){
-            ll f1,f2; cin >> f1 >> f2;
-            m.push_back({f1,f2});
-        }
-        if(c == 2){
-            sort(m.begin(),m.end(),sortMonopoly);
-            ll a = m[0].first;
-            ll b = m[0].second;
-            for(int i{1} ; i<m.size() ; i++){
-                if(i<m.size()-1 && m[i].first >= a-1 && m[i].first<=b+1){
-                    a = min(a,m[i].first);
-                    b = max(b,m[i].second);
-                }else if(i == m.size()-1){
-                    if(m[i].first >= a-1 && m[i].first<=b+1){
-                        a = min(a,m[i].first);
-                        b = max(b,m[i].second);
-                        cal.push_back({a,b});
-                    }
-                    else{
-                        cal.push_back({a,b});
-                        cal.push_back(m[i]);
-                    }
-                }
-                else{
-                    cal.push_back({a,b});
-                    a = m[i].first;
-                    b = m[i].second;
-                }
-                
+        if (c == 1) { 
+            pair<ll, ll> q;
+            cin >> q.first >> q.second;
+            auto it = monopoly.lower_bound(q);
+            if (it != monopoly.begin() && prev(it)->second >= q.first-1) {
+                --it;
             }
-            cout << cal.size() << "\n";
-            m = cal;
-            cal.clear();
+            while (it != monopoly.end() && it->first <= q.second+1) {
+                q.first = min(q.first, it->first);
+                q.second = max(q.second, it->second);
+                it = monopoly.erase(it);
+            }
+            monopoly.insert(q);
+        } else {
+            cout << monopoly.size() << "\n";
         }
     }
 }

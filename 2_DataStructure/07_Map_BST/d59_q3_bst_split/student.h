@@ -1,9 +1,7 @@
 #ifndef __STUDENT_H_
 #define __STUDENT_H_
 
-template <typename KeyT,
-          typename MappedT,
-          typename CompareT >
+template <typename KeyT,typename MappedT,typename CompareT >
 CP::map_bst<KeyT,MappedT,CompareT> CP::map_bst<KeyT,MappedT,CompareT>::split(KeyT val) {
   CP::map_bst<KeyT,MappedT,CompareT> result;
   result.mRoot = nullptr;
@@ -12,16 +10,14 @@ CP::map_bst<KeyT,MappedT,CompareT> CP::map_bst<KeyT,MappedT,CompareT>::split(Key
   while(it != NULL){
     int cmp = compare(it->data.first, val);
     if(cmp == -1){
-      tmp = it->left; //save for next state
-
+      tmp = it->left;
       if(it == mRoot){
         mRoot = it->left;
-        it->left = NULL; //cut from the tree
+        it->left = NULL;
       }else{ 
         it->parent = NULL;
         it->left = NULL;
       }
-
       if(res == NULL){
         result.mRoot = it;
       }else{

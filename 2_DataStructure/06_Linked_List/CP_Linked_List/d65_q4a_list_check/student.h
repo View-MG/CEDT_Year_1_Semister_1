@@ -4,7 +4,7 @@
 
 template <typename T>
 bool CP::list<T>::check() {
-  //your code here
+  auto it = this->mHeader;
   return true;
 }
 
